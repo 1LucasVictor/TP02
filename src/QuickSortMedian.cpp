@@ -4,12 +4,12 @@ int partitionM(int *v, int begin, int end) {
   int aux;
 
   // Getting the median value as pivot
-  if (v[begin] > v[pivotInd]) {
+  if (v[begin] > v[pivotInd] && v[end] > v[begin]) {
     aux = v[begin];
     v[begin] = v[pivotInd];
     v[pivotInd] = aux;
   }
-  if (v[end] > v[pivotInd]) {
+  else if (v[end] > v[pivotInd] && v[begin] > v[end]) {
     aux = v[end];
     v[end] = v[pivotInd];
     v[pivotInd] = aux;
