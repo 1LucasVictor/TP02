@@ -1,23 +1,25 @@
-int partition(int *v, int begin, int end) {
-    int pivotInd = (begin+end)/2;
-    int i = begin, j = end;
-    while(i < j) {
-        while(v[i] < v[pivotInd]) i++;
-        while(v[j] > v[pivotInd]) j--;
-        if(i < j) {
-            if(pivotInd == i) pivotInd = j;
-            else if(pivotInd == j) pivotInd = i;
-            int aux = v[i];
-            v[i] = v[j];
-            v[j] = aux;
-        }
+#include "QuickSorts.hpp"
+void partition(int *v, int begin, int end, int &i, int &j) {
+  int pivot = v[(begin + end) / 2];
+  i = begin; j = end;
+  int aux;
+  while (i <= j) {
+    while (v[i] < pivot) i++;
+    while (v[j] > pivot) j--;
+    if (i <= j) {
+      aux = v[i];
+      v[i] = v[j];
+      v[j] = aux;
+      i++;
+      j--;
     }
-    return pivotInd;
+  }
 }
 void quickSort(int *v, int begin, int end) {
-    if(begin < end) {
-    int pivotInd = partition(v, begin, end);
-    quickSort(v, begin, pivotInd-1);
-    quickSort(v, pivotInd+1, end);
-    }
+  int i, j;
+  if (begin < end) {
+    partition(v, begin, end, i, j);
+    quickSort(v, begin, j);
+    quickSort(v, i, end);
+  }
 }

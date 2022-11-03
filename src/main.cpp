@@ -1,15 +1,20 @@
 #include <iostream>
+
 #include "QuickSorts.hpp"
 using namespace std;
+#define len 500
 void printVector(int *v, int n) {
-    for(int i = 0; i < n; i++) {
-        cout << v[i];
-    }
-    cout << endl;
+  for (int i = 0; i < n; i++) {
+    cout << v[i] << ", ";
+  }
+  cout << endl;
 }
 int main() {
-    int v[] = {3, 8, 6, 5, 7, 4, 1, 2};
-    quickSortM(v, 0, 7);
-    printVector(v, 8);
-    return 0;
+  int v[len];
+  for (int i = 0; i < len; i++) {
+    v[i] = rand() % 30;
+  }
+  quickSortS(v, 0, len - 1);
+  printVector(v, len);
+  return 0;
 }

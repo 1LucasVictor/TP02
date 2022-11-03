@@ -1,44 +1,35 @@
 #include "QuickSorts.hpp"
-int partitionM(int *v, int begin, int end) {
-  int pivotInd = (begin + end) / 2;
+void partitionM(int *v, int begin, int end, int &i, int &j) {
+  int pivot = v[(begin + end) / 2];
   int aux;
 
   // Getting the median value as pivot
-  if ((v[begin] > v[pivotInd] && v[end] > v[begin]) ||
-      (v[begin] < v[pivotInd] && v[begin] > v[end])) {
-
-    aux = v[begin];
-    v[begin] = v[pivotInd];
-    v[pivotInd] = aux;
-  } else if ((v[end] > v[pivotInd] && v[begin] > v[end]) ||
-             (v[end] < v[pivotInd] && v[end] > v[begin])) {
-    aux = v[end];
-    v[end] = v[pivotInd];
-    v[pivotInd] = aux;
+  if ((v[begin] > pivot && v[end] > v[begin]) ||
+      (v[begin] < pivot && v[begin] > v[end])) {
+    pivot = v[begin];
+  } else if ((v[end] > pivot && v[begin] > v[end]) ||
+             (v[end] < pivot && v[end] > v[begin])) {
+    pivot = v[end];
   }
 
-  int i = begin, j = end;
-  while (i < j) {
-    while (v[i] < v[pivotInd])
-      i++;
-    while (v[j] > v[pivotInd])
-      j--;
-    if (i < j) {
-      if (pivotInd == i)
-        pivotInd = j;
-      else if (pivotInd == j)
-        pivotInd = i;
+  i = begin; j = end;
+  while (i <= j) {
+    while (v[i] < pivot) i++;
+    while (v[j] > pivot) j--;
+    if (i <= j) {
       aux = v[i];
       v[i] = v[j];
       v[j] = aux;
+      i++;
+      j--;
     }
   }
-  return pivotInd;
 }
 void quickSortM(int *v, int begin, int end) {
+  int i, j;
   if (begin < end) {
-    int pivotInd = partitionM(v, begin, end);
-    quickSortM(v, begin, pivotInd - 1);
-    quickSortM(v, pivotInd + 1, end);
+    partitionM(v, begin, end, i, j);
+    quickSortM(v, begin, j);
+    quickSortM(v, i, end);
   }
 }
