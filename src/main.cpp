@@ -14,7 +14,7 @@ int main() {
   for (int i = 0; i < len; i++) {
     v[i] = rand() % 30;
   }
-  quickSortS(v, 0, len - 1);
+  QuickSortNR(v, len);
   printVector(v, len);
   return 0;
 }
