@@ -3,13 +3,21 @@
 #include "QuickSorts.hpp"
 using namespace std;
 #define len 200000
+
 void printVector(int *v, int n) {
   for (int i = 0; i < n; i++) {
     cout << v[i] << ", ";
   }
   cout << endl;
 }
-int main() {
+
+struct Register {
+  int key;
+  char strings[15][200] = {""};
+  int numbers[10];
+};
+
+int main(int argc, char *argv[]) {
   int v[len];
   for (int i = 0; i < len; i++) {
     v[i] = rand() % 500;
