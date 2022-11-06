@@ -2,7 +2,7 @@
 
 #include "QuickSorts.hpp"
 using namespace std;
-#define len 500
+#define len 200000
 void printVector(int *v, int n) {
   for (int i = 0; i < n; i++) {
     cout << v[i] << ", ";
@@ -12,9 +12,12 @@ void printVector(int *v, int n) {
 int main() {
   int v[len];
   for (int i = 0; i < len; i++) {
-    v[i] = rand() % 30;
+    v[i] = rand() % 500;
   }
-  QuickSortNR(v, len);
+
+  int comp = 0, atrib = 0;
+  quickSortS(v, 0, len-1, comp, atrib);
   printVector(v, len);
+  cout << "Comparações: " << comp << "; Atribuições: " << atrib << endl;
   return 0;
 }

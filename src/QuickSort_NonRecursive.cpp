@@ -25,24 +25,34 @@ class stack {
   item *top;
 };
 
-void partitionNR(int *v, int begin, int end, int &i, int &j) {
+void partitionNR(int *v, int begin, int end, int &i, int &j, int &comp,
+                 int &atrib) {
   int pivot = v[(begin + end) / 2];
-  i = begin; j = end;
+  atrib++;
+  i = begin;
+  j = end;
   int aux;
   while (i <= j) {
-    while (v[i] < pivot) i++;
-    while (v[j] > pivot) j--;
+    while (v[i] < pivot) {
+      i++;
+      comp++;
+    }
+    while (v[j] > pivot) {
+      j--;
+      comp++;
+    }
     if (i <= j) {
       aux = v[i];
       v[i] = v[j];
       v[j] = aux;
       i++;
       j--;
+      atrib+=3;
     }
   }
 }
 
-void QuickSortNR(int *v, int n) {
+void quickSortNR(int *v, int n, int &comp, int &atrib) {
   stack s;
   int left, right, i, j;
 
@@ -51,7 +61,7 @@ void QuickSortNR(int *v, int n) {
   s.insert(left, right);
   do
     if (right > left) {
-      partitionNR(v, left, right, i, j);
+      partitionNR(v, left, right, i, j, comp, atrib);
       if ((j - left) > (right - i)) {
         s.insert(left, j);
         left = i;
@@ -60,9 +70,9 @@ void QuickSortNR(int *v, int n) {
         right = j;
       }
     } else {
-     auto aux = s.remove();
-     right = aux.right;
-     left = aux.left;
+      auto aux = s.remove();
+      right = aux.right;
+      left = aux.left;
     }
   while (!s.empty());
 }

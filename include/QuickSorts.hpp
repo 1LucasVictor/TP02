@@ -1,9 +1,9 @@
 #ifndef QS
 #define QS
 
-void quickSort(int *v, int begin, int end);
-void quickSortM(int *v, int begin, int end);
-void quickSortS(int *v, int begin, int end);
-void QuickSortNR(int *v, int n);
+void quickSort(int *v, int begin, int end, int &comp, int &atrib);
+void quickSortM(int *v, int begin, int end, int &comp, int &atrib);
+void quickSortS(int *v, int begin, int end, int &comp, int &atrib);
+void quickSortNR(int *v, int n, int &comp, int &atrib);
 
 #endif
