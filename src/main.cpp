@@ -2,30 +2,27 @@
 
 #include "QuickSorts.hpp"
 using namespace std;
-#define len 200000
+#define len 20000
 
-void printVector(int *v, int n) {
+
+void printKeys(Register r[], int n) {
   for (int i = 0; i < n; i++) {
-    cout << v[i] << ", ";
+    cout << r[i].key << " | ";
   }
   cout << endl;
 }
 
-struct Register {
-  int key;
-  char strings[15][200] = {""};
-  int numbers[10];
-};
 
 int main(int argc, char *argv[]) {
-  int v[len];
+  Register *registers = new Register[len];
   for (int i = 0; i < len; i++) {
-    v[i] = rand() % 500;
+    registers[i].key = rand() % 500;
   }
-
+  cout << "Oi" << endl;
   int comp = 0, atrib = 0;
-  quickSortS(v, 0, len-1, comp, atrib);
-  printVector(v, len);
+  quickSortM(registers, 0, len-1, comp, atrib);
+  // quickSortNR(registers,len, comp, atrib);
+  printKeys(registers, len);
   cout << "Comparações: " << comp << "; Atribuições: " << atrib << endl;
   return 0;
 }

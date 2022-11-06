@@ -1,10 +1,10 @@
 #include "QuickSorts.hpp"
-void selection(int *v, int begin, int end, int &comp, int &atrib) {
-  int aux;
+void selection(Register v[], int begin, int end, int &comp, int &atrib) {
+  Register aux;
   for (int i = end; i > begin; i--) {
     int biggest = 0;
     for (int j = begin; j <= i; j++) {
-      if (v[j] > v[biggest]) biggest = j;
+      if (v[j].key > v[biggest].key) biggest = j;
       comp++;
     }
     aux = v[i];
@@ -13,19 +13,19 @@ void selection(int *v, int begin, int end, int &comp, int &atrib) {
     atrib += 3;
   }
 }
-void partitionS(int *v, int begin, int end, int &i, int &j, int &comp,
+void partitionS(Register v[], int begin, int end, int &i, int &j, int &comp,
                 int &atrib) {
-  int pivot = v[(begin + end) / 2];
+  auto pivot = v[(begin + end) / 2];
   atrib++;
   i = begin;
   j = end;
-  int aux;
+  Register aux;
   while (i <= j) {
-    while (v[i] < pivot) {
+    while (v[i].key < pivot.key) {
       i++;
       comp++;
     }
-    while (v[j] > pivot) {
+    while (v[j].key > pivot.key) {
       j--;
       comp++;
     }
@@ -39,9 +39,9 @@ void partitionS(int *v, int begin, int end, int &i, int &j, int &comp,
     }
   }
 }
-void quickSortS(int *v, int begin, int end, int &comp, int &atrib) {
+void quickSortS(Register v[], int begin, int end, int &comp, int &atrib) {
   int i, j;
-  if ((end - begin + 1) <= 100) {
+  if ((end - begin + 1) <= 10) {
     selection(v, begin, end, comp, atrib);
   } else if (begin < end) {
     partitionS(v, begin, end, i, j, comp, atrib);

@@ -1,15 +1,15 @@
 #include "QuickSorts.hpp"
-void partition(int *v, int begin, int end, int &i, int &j, int &comp, int &atrib) {
-  int pivot = v[(begin + end) / 2];
+void partition(Register v[], int begin, int end, int &i, int &j, int &comp, int &atrib) {
+  auto pivot = v[(begin + end) / 2];
   atrib++;
   i = begin; j = end;
-  int aux;
+  Register aux;
   while (i <= j) {
-    while (v[i] < pivot) {
+    while (v[i].key < pivot.key) {
       i++;
       comp++;
     }
-    while (v[j] > pivot) {
+    while (v[j].key > pivot.key) {
       j--;
       comp++;
     }
@@ -23,7 +23,7 @@ void partition(int *v, int begin, int end, int &i, int &j, int &comp, int &atrib
     }
   }
 }
-void quickSort(int *v, int begin, int end, int &comp, int &atrib) {
+void quickSort(Register v[], int begin, int end, int &comp, int &atrib) {
   int i, j;
   if (begin < end) {
     partition(v, begin, end, i, j, comp, atrib);
