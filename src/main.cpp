@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include "QuickSorts.hpp"
 #include <sys/resource.h>
+#include "QuickSorts.hpp"
 using namespace std;
 
 void printKeys(Register r[], int n) {
@@ -47,6 +47,11 @@ int main(int argc, char *argv[]) {
       registers[i].key = rand() % 500;
     }
 
+    //Preparing to get execution time
+    struct rusage resources;
+    int rc;
+    double utime, stime, total_time;
+
     //Sorting
     switch (wichQS)
     {
@@ -65,11 +70,17 @@ int main(int argc, char *argv[]) {
     case 5:
       quickSortNR(registers, nReg, comp, atrib);
       break;
-    }
+    } 
+    if((rc = getrusage(RUSAGE_SELF, &resources)) != 0)
+      perror("getrusage failed");
+    utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
+    stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
+    total_time = utime+stime;
+    printf("User time %.3f, System time %.3f, Total Time %.3f\n", utime, stime, total_time);
     printKeys(registers, nReg);
     delete registers;
     N--;
   }
-  
+
   return 0;
 }
