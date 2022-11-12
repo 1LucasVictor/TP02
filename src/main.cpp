@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     } else if ((string)argv[i] == "-o") {
       output = argv[i + 1];
     } else if ((string)argv[i] == "-v") {
-      wichQS = *argv[i+1];
+      wichQS = stoi(argv[i+1]);
     } else if((string)argv[i]=="-s") {
       seed = stoi(argv[i+1]);
     }
@@ -64,10 +64,10 @@ int main(int argc, char *argv[]) {
       quickSortS(registers, 0, nReg-1, comp, atrib);
       break;
     case 4:
-      quickSortNR(registers, nReg, comp, atrib);
+      quickSortNR(registers, 0, nReg-1, comp, atrib);
       break;
     case 5:
-      quickSortNR(registers, nReg, comp, atrib);
+      quickSortEI(registers, nReg, comp, atrib);
       break;
     } 
 
@@ -79,6 +79,8 @@ int main(int argc, char *argv[]) {
     total_time = utime+stime;
 
     printf("User time %.3f, System time %.3f, Total Time %.3f\n", utime, stime, total_time);
+    cout << "Comparações: " << comp << " Atrib: " <<  atrib << endl;
+    
     // printKeys(registers, nReg);
 
     delete registers;

@@ -25,7 +25,7 @@ class stack {
   item *top;
 };
 
-void partitionNR(Register v[], int begin, int end, int &i, int &j, int &comp,
+void partitionEI(Register v[], int begin, int end, int &i, int &j, int &comp,
                  int &atrib) {
   auto pivot = v[(begin + end) / 2];
   atrib++;
@@ -52,27 +52,37 @@ void partitionNR(Register v[], int begin, int end, int &i, int &j, int &comp,
   }
 }
 
-void quickSortNR(Register v[], int n, int &comp, int &atrib) {
+void quickSortEI(Register v[], int n, int &comp, int &atrib) {
   stack s;
   int left, right, i, j;
 
   left = 0;
   right = n - 1;
+  atrib += 2;
+
   s.insert(left, right);
-  do
+  do {
+    comp++;
     if (right > left) {
-      partitionNR(v, left, right, i, j, comp, atrib);
+      partitionEI(v, left, right, i, j, comp, atrib);
       if ((j - left) > (right - i)) {
+        comp++;
         s.insert(left, j);
         left = i;
+        atrib++;
       } else {
+        comp++;
+        atrib++;
         s.insert(i, right);
         right = j;
       }
     } else {
+      comp++;
+      atrib += 3;
       auto aux = s.remove();
       right = aux.right;
       left = aux.left;
     }
+  }
   while (!s.empty());
 }

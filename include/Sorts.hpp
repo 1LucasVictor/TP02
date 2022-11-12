@@ -10,6 +10,7 @@ struct Register {
 void quickSort(Register v[], int begin, int end, int &comp, int &atrib);
 void quickSortM(Register v[], int begin, int end, int &comp, int &atrib);
 void quickSortS(Register v[], int begin, int end, int &comp, int &atrib);
-void quickSortNR(Register v[], int n, int &comp, int &atrib);
+void quickSortNR(Register v[], int begin, int end, int &comp, int &atrib);
+void quickSortEI(Register v[], int n, int &comp, int &atrib);
 
 #endif
