@@ -1,0 +1,21 @@
+7: 
+User time 0.003658 System time 0 Total Time 0.003658
+Comparações: 10119 Atrib: 12272
+6: 
+User time 0.008701 System time 0.008701 Total Time 0.017402
+Comparações: 70548 Atrib: 69490
+5: 
+User time 0.032279 System time 0.010759 Total Time 0.043038
+Comparações: 137702 Atrib: 145487
+4: 
+User time 0.164304 System time 0.041076 Total Time 0.20538
+Comparações: 838757 Atrib: 804822
+3: 
+User time 0.438828 System time 0.08976 Total Time 0.528588
+Comparações: 1850015 Atrib: 1668876
+2: 
+User time 2.74881 System time 0.47151 Total Time 3.22032
+Comparações: 10384916 Atrib: 9166037
+1: 
+User time 7.18818 System time 2.95345 Total Time 10.1416
+Comparações: 20108747 Atrib: 19172353

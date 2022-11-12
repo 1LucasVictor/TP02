@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sys/resource.h>
 #include "Sorts.hpp"
+#include <iomanip>
+
 using namespace std;
 
 void printKeys(Register r[], int n) {
@@ -44,7 +46,6 @@ int main(int argc, char *argv[]) {
     for(int i = 0; i < nReg; i++) {
       registers[i].key = rand();
     }
-    cout << N << ": " << nReg <<endl;
 
     //Preparing to get execution time
     struct rusage resources;
@@ -77,9 +78,10 @@ int main(int argc, char *argv[]) {
     utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
     stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
     total_time = utime+stime;
-
-    printf("User time %.3f, System time %.3f, Total Time %.3f\n", utime, stime, total_time);
-    cout << "Comparações: " << comp << " Atrib: " <<  atrib << endl;
+    
+    outputFile << N << ": \n";
+    outputFile << "User time " << utime <<" System time " << stime << " Total Time " << total_time << "\n";
+    outputFile << "Comparações: " << comp << " Atrib: " <<  atrib << endl;
     
     // printKeys(registers, nReg);
 
