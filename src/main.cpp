@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sys/resource.h>
-#include "QuickSorts.hpp"
+#include "Sorts.hpp"
 using namespace std;
 
 void printKeys(Register r[], int n) {
@@ -16,27 +16,25 @@ int main(int argc, char *argv[]) {
   int wichQS, seed;
 
   for (int i = 1; i < argc; i += 2) {
-    if (argv[i] == "-i") {
+    if ((string)argv[i] == "-i") {
       input = argv[i + 1];
-    } else if (argv[i] == "-o") {
+    } else if ((string)argv[i] == "-o") {
       output = argv[i + 1];
-    } else if (argv[i] == "-v") {
+    } else if ((string)argv[i] == "-v") {
       wichQS = *argv[i+1];
-    } else if(argv[i]=="-s") {
-      seed = *argv[i+1];
+    } else if((string)argv[i]=="-s") {
+      seed = stoi(argv[i+1]);
     }
   }
   //Setting the new seed
   srand(seed);
 
-  
-  
-  fstream inputFile(input);
-  fstream outputFile(output);
+  fstream inputFile(input, fstream::in);
+  fstream outputFile(output, fstream::out);
   int N, nReg;
   inputFile >> N;
 
-  while(N) {
+  while(N > 0) {
     inputFile >> nReg;
     // List of itens
     Register *registers = new Register[nReg];
@@ -44,8 +42,9 @@ int main(int argc, char *argv[]) {
     int comp = 0, atrib = 0;
     // Generating keys
     for(int i = 0; i < nReg; i++) {
-      registers[i].key = rand() % 500;
+      registers[i].key = rand();
     }
+    cout << N << ": " << nReg <<endl;
 
     //Preparing to get execution time
     struct rusage resources;
@@ -71,13 +70,17 @@ int main(int argc, char *argv[]) {
       quickSortNR(registers, nReg, comp, atrib);
       break;
     } 
+
+    //Getting time spent infos
     if((rc = getrusage(RUSAGE_SELF, &resources)) != 0)
       perror("getrusage failed");
     utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
     stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
     total_time = utime+stime;
+
     printf("User time %.3f, System time %.3f, Total Time %.3f\n", utime, stime, total_time);
-    printKeys(registers, nReg);
+    // printKeys(registers, nReg);
+
     delete registers;
     N--;
   }

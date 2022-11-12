@@ -1,4 +1,4 @@
-#include "QuickSorts.hpp"
+#include "Sorts.hpp"
 void selection(Register v[], int begin, int end, int &comp, int &atrib) {
   Register aux;
   for (int i = end; i > begin; i--) {

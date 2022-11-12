@@ -1,4 +1,4 @@
-#include "QuickSorts.hpp"
+#include "Sorts.hpp"
 
 struct item {
   int left;

@@ -1,4 +1,4 @@
-#include "QuickSorts.hpp"
+#include "Sorts.hpp"
 void partition(Register v[], int begin, int end, int &i, int &j, int &comp, int &atrib) {
   auto pivot = v[(begin + end) / 2];
   atrib++;
